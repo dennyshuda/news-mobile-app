@@ -1,6 +1,6 @@
-# Mobile News App
+# News Mobile App
 
-Welcome to the Mobile News App project! This application provides users with the latest news articles from various sources, presented in a user-friendly interface.
+Welcome to the News Mobile App project! This application provides users with the latest news articles from various sources, presented in a user-friendly interface.
 
 ## Table of Contents
 
@@ -13,7 +13,7 @@ Welcome to the Mobile News App project! This application provides users with the
 
 ## Introduction
 
-The Mobile News App is designed to keep you updated with the latest news from around the world. It fetches articles from multiple news sources and categorizes them for easy navigation. Whether you're interested in technology, sports, politics, or entertainment, our app has got you covered.
+The News Mobile App is designed to keep you updated with the latest news from around the world. It fetches articles from multiple news sources and categorizes them for easy navigation. Whether you're interested in technology, sports, politics, or entertainment, our app has got you covered.
 
 ## Features
 
@@ -23,12 +23,12 @@ The Mobile News App is designed to keep you updated with the latest news from ar
 
 ## Installation
 
-To get started with the Mobile News App, follow these steps:
+To get started with the News Mobile App, follow these steps:
 
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/your-username/mobile-news-app.git
+   git clone https://github.com/dennyshuda/news-mobile-app.git
    ```
 
 2. Navigate to the project directory:
@@ -67,7 +67,7 @@ Include screenshots of the app to give users a visual understanding of its featu
 
 ## Contributing
 
-We welcome contributions to the Mobile News App project! To contribute:
+We welcome contributions to the News Mobile App project! To contribute:
 
 1. Fork the repository.
 2. Create a new branch:
