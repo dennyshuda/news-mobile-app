@@ -10,8 +10,6 @@ Welcome to the Mobile News App project! This application provides users with the
 - [Usage](#usage)
 - [Screenshots](#screenshots)
 - [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
 
 ## Introduction
 
@@ -50,8 +48,6 @@ To get started with the Mobile News App, follow these steps:
    npm run android or npm start
    ```
 
-Alternatively, you can open the project in your preferred mobile development environment (e.g., Android Studio, Xcode) and build/run it from there.
-
 ## Usage
 
 Once the app is installed and running, you can:
@@ -60,7 +56,6 @@ Once the app is installed and running, you can:
 - Tap on any article to read the full content.
 - Use the search function to find articles on specific topics.
 - Save articles by tapping the bookmark icon.
-- Share articles by tapping the share icon.
 
 ## Screenshots
 
@@ -81,7 +76,7 @@ We welcome contributions to the Mobile News App project! To contribute:
    ```
 3. Make your changes and commit them:
    ```sh
-   git commit -m 'Add some feature'
+   git commit -m 'feat: Add some feature'
    ```
 4. Push to the branch:
    ```sh
@@ -90,17 +85,3 @@ We welcome contributions to the Mobile News App project! To contribute:
 5. Create a pull request.
 
 Please ensure your code adheres to our coding guidelines and includes appropriate tests.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-If you have any questions or need further assistance, feel free to contact us at:
-
-- Email: support@mobilenewsapp.com
-- Twitter: [@MobileNewsApp](https://twitter.com/MobileNewsApp)
-- GitHub: [Issues](https://github.com/your-username/mobile-news-app/issues)
-
-Thank you for using the Mobile News App!
