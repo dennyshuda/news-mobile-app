@@ -15,7 +15,7 @@ const SignIn = () => {
 	return (
 		<SafeAreaView style={{ backgroundColor: "white", height: "100%" }}>
 			<ScrollView>
-				<View className="w-full justify-center px-4 py-6 gap-3">
+				<View className="w-full justify-center px-6 py-6 gap-3">
 					<View className="flex items-center py-6">
 						<Text className="text-4xl font-bold text-dark-900">Login</Text>
 						{/* <Text className="text-lg text-primary-500">Enter your account to continue</Text> */}
@@ -40,7 +40,7 @@ const SignIn = () => {
 							onChangeText={(text) => setForm({ ...form, password: text })}
 							className="w-fit"
 						/>
-						<View className="mt-20">
+						<View className="mt-12">
 							<CustomButton title="Masuk" onPress={submit} />
 							<Text className="text-lg text-center">
 								Don't have account?{" "}
