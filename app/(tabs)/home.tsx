@@ -1,10 +1,12 @@
-import { Text, View } from "react-native";
+import { SafeAreaView, ScrollView, Text } from "react-native";
 
 const Home = () => {
 	return (
-		<View>
-			<Text>Home</Text>
-		</View>
+		<SafeAreaView style={{ backgroundColor: "white", height: "100%" }}>
+			<ScrollView>
+				<Text>Home</Text>
+			</ScrollView>
+		</SafeAreaView>
 	);
 };
 
