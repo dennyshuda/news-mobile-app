@@ -4,5 +4,8 @@ import profile from "../assets/icons/profile.png";
 import eyeHide from "../assets/icons/eye-hide.png";
 import eye from "../assets/icons/eye.png";
 import bookmark from "../assets/icons/bookmark.png";
+import arrowLeft from "../assets/icons/arrow-left.png";
+import archive from "../assets/icons/archive.png";
+import archiveFill from "../assets/icons/archive-fill.png";
 
-export default { home, plus, profile, eyeHide, eye, bookmark };
+export default { home, plus, profile, eyeHide, eye, bookmark, arrowLeft, archive, archiveFill };
