@@ -7,7 +7,7 @@ type IPostType = IPost & {
 	user: IUser;
 };
 
-const useGetPost = () => {
+const useGetPost = (token: string) => {
 	const [posts, setPost] = useState<IPostType[]>();
 	const [status, setStatus] = useState<"idle" | "loading">("idle");
 	const [error, setError] = useState<string>("");
@@ -15,7 +15,7 @@ const useGetPost = () => {
 	useEffect(() => {
 		const getPost = async () => {
 			try {
-				const response = await axiosInstance().get("/post");
+				const response = await axiosInstance({ token: token }).get("/post");
 				setPost(response.data.posts);
 				setStatus("loading");
 			} catch {
