@@ -1,10 +1,13 @@
 import axios, { CreateAxiosDefaults } from "axios";
 
-const axiosInstance = (instanceSettings?: CreateAxiosDefaults) => {
-	// const token = "tokenhere";
+type AxiosInstanceParams = {
+	token: string;
+};
+
+const axiosInstance = (token?: AxiosInstanceParams, instanceSettings?: CreateAxiosDefaults) => {
 	const instance = axios.create({
-		baseURL: "http://10.0.2.2:8000",
-		// headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+		baseURL: "https://news-mobile-app-api.vercel.app",
+		headers: token ? { Authorization: `Bearer ${token}` } : undefined,
 		...instanceSettings,
 	});
 
