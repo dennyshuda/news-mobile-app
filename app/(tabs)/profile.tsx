@@ -10,7 +10,7 @@ const Profile = () => {
 				<View className="px-4 pt-10">
 					<Nav showBookmark={false} />
 
-					<View className="h-[85vh] justify-between">
+					<View className="gap-10">
 						<View className="items-center gap-10">
 							<Image source={images.avatar} className="w-30 h-30" />
 
