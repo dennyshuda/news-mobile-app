@@ -14,21 +14,40 @@ type TabBarProps = Omit<TabIconProps, "icon" | "name">;
 const TabIcon = ({ icon, color, name, focused }: TabIconProps) => {
 	return (
 		<View className="items-center justify-center gap-2">
-			<Image source={icon} resizeMode="contain" tintColor={color} className="w-6 h-6" />
-			{/* <Text className={`${focused ? "font-semibold" : "font-normal"} text-xs`}>{name}</Text> */}
+			<Image
+				source={icon}
+				resizeMode="contain"
+				tintColor={focused ? "#FF8080" : "#8291A5"}
+				className="w-6 h-6"
+			/>
+			<Text
+				className={`${
+					focused ? "font-semibold text-carnation-400" : "font-normal text-lynch-400"
+				} text-xs`}
+			>
+				{name}
+			</Text>
 		</View>
 	);
 };
 
-const TabsLayout = () => (
-	<>
+const TabsLayout = () => {
+	const writer = true;
+
+	return (
 		<Tabs
 			screenOptions={{
+				headerShown: false,
 				tabBarShowLabel: false,
-				tabBarActiveTintColor: "#2952CC",
 				tabBarStyle: {
-					backgroundColor: "#fff",
-					height: 60,
+					position: "absolute",
+					height: 72,
+					backgroundColor: "white",
+					elevation: 4,
+					borderTopLeftRadius: 16,
+					borderTopRightRadius: 16,
+					alignItems: "center",
+					justifyContent: "center",
 				},
 			}}
 		>
@@ -47,8 +66,21 @@ const TabsLayout = () => (
 				options={{
 					title: "Create",
 					headerShown: false,
+					tabBarItemStyle: {
+						display: writer ? "flex" : "none",
+						position: "absolute",
+						right: 50,
+						bottom: 110,
+					},
 					tabBarIcon: ({ color, focused }: TabBarProps) => (
-						<TabIcon icon={icons.plus} color={color} name="Create" focused={focused} />
+						<View className="items-center justify-center gap-2 rounded-full  h-20 w-20 mb-10">
+							<Image
+								source={icons.plus}
+								resizeMode="contain"
+								tintColor={"#FF8080"}
+								className="w-16 h-16"
+							/>
+						</View>
 					),
 				}}
 			/>
@@ -73,7 +105,7 @@ const TabsLayout = () => (
 				}}
 			/>
 		</Tabs>
-	</>
-);
+	);
+};
 
 export default TabsLayout;
