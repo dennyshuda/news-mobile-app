@@ -7,5 +7,17 @@ import bookmark from "../assets/icons/bookmark.png";
 import arrowLeft from "../assets/icons/arrow-left.png";
 import archive from "../assets/icons/archive.png";
 import archiveFill from "../assets/icons/archive-fill.png";
+import galleryAdd from "../assets/icons/gallery-add.png";
 
-export default { home, plus, profile, eyeHide, eye, bookmark, arrowLeft, archive, archiveFill };
+export default {
+	home,
+	plus,
+	profile,
+	eyeHide,
+	eye,
+	bookmark,
+	arrowLeft,
+	archive,
+	archiveFill,
+	galleryAdd,
+};
