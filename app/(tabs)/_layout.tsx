@@ -66,6 +66,7 @@ const TabsLayout = () => {
 				options={{
 					title: "Create",
 					headerShown: false,
+					tabBarStyle: { display: "none" },
 					tabBarItemStyle: {
 						display: writer ? "flex" : "none",
 						position: "absolute",
@@ -73,7 +74,7 @@ const TabsLayout = () => {
 						bottom: 110,
 					},
 					tabBarIcon: ({ color, focused }: TabBarProps) => (
-						<View className="items-center justify-center gap-2 rounded-full  h-20 w-20 mb-10">
+						<View className="items-center justify-center gap-2 rounded-full h-20 w-20 mb-10">
 							<Image
 								source={icons.plus}
 								resizeMode="contain"
