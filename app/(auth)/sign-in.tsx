@@ -1,15 +1,25 @@
 import { ScrollView, Text, View } from "react-native";
 import { useState } from "react";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
+import useLogin from "../../services/hooks/useLogin";
+import { useAuth } from "../../context/AuthContext";
 
 const SignIn = () => {
-	const [form, setForm] = useState({ nama: "", email: "", password: "" });
+	const [form, setForm] = useState({ email: "", password: "" });
 
-	const submit = () => {
-		console.log(form);
+	const { setToken }: any = useAuth();
+	const { createLogin } = useLogin();
+	const submit = async () => {
+		const { response } = await createLogin(form);
+		setToken(response?.data.data.accessToken);
+		if (response?.data.statusCode === 200) {
+			router.push("/home");
+		} else {
+			console.log("error login");
+		}
 	};
 
 	return (
@@ -22,12 +32,6 @@ const SignIn = () => {
 					</View>
 
 					<View className="gap-5 mt-16">
-						<FormField
-							title="Nama"
-							placeholder="Masukkan Nama"
-							// keyboardType="email-address"
-							onChangeText={(text) => setForm({ ...form, nama: text })}
-						/>
 						<FormField
 							title="Email"
 							placeholder="Masukkan Email"
