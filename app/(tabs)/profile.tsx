@@ -2,8 +2,11 @@ import { SafeAreaView, ScrollView, Image, View, Text } from "react-native";
 import Nav from "../../components/Nav";
 import images from "../../constant/images";
 import CustomButton from "../../components/CustomButton";
+import { AuthContextType, useAuth } from "../../context/AuthContext";
 
 const Profile = () => {
+	const { user, logout } = useAuth() as AuthContextType;
+
 	return (
 		<SafeAreaView style={{ backgroundColor: "white", height: "100%" }}>
 			<ScrollView contentContainerStyle={{ height: "100%" }}>
@@ -15,8 +18,8 @@ const Profile = () => {
 							<Image source={images.avatar} className="w-30 h-30" />
 
 							<View className="items-center">
-								<Text className="font-bold text-2xl text-lynch-900">Kobo Kanaeru</Text>
-								<Text className="text-lynch-400 text-lg">kobokanaeru@gmail.com</Text>
+								<Text className="font-bold text-2xl text-lynch-900">{user?.username}</Text>
+								<Text className="text-lynch-400 text-lg">{user?.email}</Text>
 							</View>
 
 							<View className="flex-row gap-5">
@@ -32,7 +35,7 @@ const Profile = () => {
 							</View>
 						</View>
 
-						<CustomButton title="Keluar" />
+						<CustomButton title="Keluar" onPress={logout} />
 					</View>
 				</View>
 			</ScrollView>
