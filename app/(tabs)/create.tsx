@@ -1,10 +1,131 @@
-import { SafeAreaView, ScrollView, Text, View } from "react-native";
+import {
+	Button,
+	SafeAreaView,
+	ScrollView,
+	Text,
+	View,
+	Image,
+	Pressable,
+	TextInput,
+	KeyboardAvoidingView,
+	Platform,
+} from "react-native";
+import { useRef, useState } from "react";
+import * as ImagePicker from "expo-image-picker";
+import Nav from "../../components/Nav";
+import icons from "../../constant/icons";
+import { actions, RichEditor, RichToolbar } from "react-native-pell-rich-editor";
+import CustomButton from "../../components/CustomButton";
+
+export type IconRecord = {
+	selected: boolean;
+	disabled: boolean;
+	tintColor: any;
+	iconSize: number;
+};
 
 const Create = () => {
+	const richText = useRef<RichEditor>(null);
+	const contentRef = useRef("opo");
+	const [image, setImage] = useState<string | null>(null);
+	const pickImage = async () => {
+		let result = await ImagePicker.launchImageLibraryAsync({
+			mediaTypes: ImagePicker.MediaTypeOptions.All,
+			allowsEditing: true,
+			aspect: [16, 9],
+			quality: 1,
+		});
+		if (!result.canceled) {
+			setImage(result.assets[0].uri);
+		}
+	};
+
 	return (
 		<SafeAreaView style={{ backgroundColor: "white", height: "100%" }}>
-			<ScrollView>
-				<Text>Create</Text>
+			<ScrollView style={{ height: "100%" }}>
+				<View className="px-4 pt-10">
+					<Nav showBookmark={false} />
+					{!image ? (
+						<View className="border-2 border-lynch-200 rounded-md items-center border-dashed py-10 gap-3 mt-5">
+							<Image source={icons.galleryAdd} className="w-8 h-8" />
+							<Text className="text-lynch-400 font-semibold">Tambahkan Foto Thumbnail</Text>
+							<Pressable
+								onPress={pickImage}
+								className="border-[1px] w-28 rounded-full p-1 px-4 items-center border-carnation-400"
+							>
+								<Text className="text-carnation-400 text-sm">Pilih Foto</Text>
+							</Pressable>
+						</View>
+					) : (
+						<>{image && <Image className="aspect-video" source={{ uri: image }} />}</>
+					)}
+					{image && (
+						<View className="items-center mt-3">
+							<Pressable
+								onPress={() => setImage(null)}
+								className="border-[1px] w-28 rounded-full p-1 px-4 items-center border-carnation-400"
+							>
+								<Text className="text-carnation-400 text-sm">Batalkan</Text>
+							</Pressable>
+						</View>
+					)}
+
+					<View className="gap-5">
+						<View>
+							<TextInput placeholder="Judul" className="border-b-[1px] h-14 border-b-lynch-400" />
+							<KeyboardAvoidingView
+								behavior={Platform.OS === "ios" ? "padding" : "height"}
+								style={{ flex: 1 }}
+							>
+								<RichEditor
+									ref={richText}
+									placeholder="Konten Berita"
+									onChange={(descriptionText) => {
+										contentRef.current = descriptionText;
+									}}
+								/>
+							</KeyboardAvoidingView>
+
+							<RichToolbar
+								editor={richText}
+								actions={[
+									actions.undo,
+									actions.setBold,
+									actions.setItalic,
+									actions.setUnderline,
+									actions.checkboxList,
+									actions.insertOrderedList,
+									actions.blockquote,
+									actions.alignLeft,
+									actions.alignCenter,
+									actions.alignRight,
+									actions.code,
+									actions.line,
+									actions.heading1,
+									actions.heading2,
+									actions.heading3,
+									actions.heading4,
+								]}
+								iconMap={{
+									[actions.heading1]: ({ tintColor }: IconRecord) => (
+										<Text style={[{ color: tintColor }]}>H1</Text>
+									),
+									[actions.heading2]: ({ tintColor }: IconRecord) => (
+										<Text style={[{ color: tintColor }]}>H2</Text>
+									),
+									[actions.heading3]: ({ tintColor }: IconRecord) => (
+										<Text style={[{ color: tintColor }]}>H3</Text>
+									),
+									[actions.heading4]: ({ tintColor }: IconRecord) => (
+										<Text style={[{ color: tintColor }]}>H4</Text>
+									),
+								}}
+							/>
+						</View>
+
+						<CustomButton title="Publish" onPress={() => console.log(contentRef.current)} />
+					</View>
+				</View>
 			</ScrollView>
 		</SafeAreaView>
 	);
