@@ -10,12 +10,18 @@ import { useAuth } from "../../context/AuthContext";
 const SignIn = () => {
 	const [form, setForm] = useState({ email: "", password: "" });
 
-	const { setToken }: any = useAuth();
+	const { storeUser } = useAuth() as any;
 	const { createLogin } = useLogin();
 	const submit = async () => {
 		const { response } = await createLogin(form);
-		setToken(response?.data.data.accessToken);
 		if (response?.data.statusCode === 200) {
+			storeUser({
+				id: response?.data.id,
+				email: response?.data.email,
+				username: response?.data.username,
+				role: response?.data.role,
+				token: response?.data.data.accessToken,
+			});
 			router.push("/home");
 		} else {
 			console.log("error login");
