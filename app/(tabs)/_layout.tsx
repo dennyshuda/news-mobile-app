@@ -17,7 +17,7 @@ const TabIcon = ({ icon, color, name, focused }: TabIconProps) => {
 			<Image
 				source={icon}
 				resizeMode="contain"
-				tintColor={focused ? "#FF8080" : "#8291A5"}
+				tintColor={focused ? "#FF6160" : "#8291A5"}
 				className="w-6 h-6"
 			/>
 			<Text
@@ -78,7 +78,7 @@ const TabsLayout = () => {
 							<Image
 								source={icons.plus}
 								resizeMode="contain"
-								tintColor={"#FF8080"}
+								tintColor={"#FF6160"}
 								className="w-16 h-16"
 							/>
 						</View>
