@@ -5,16 +5,17 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 import useLogin from "../../services/hooks/useLogin";
-import { useAuth } from "../../context/AuthContext";
+import { type AuthContextType, useAuth } from "../../context/AuthContext";
 
 const SignIn = () => {
 	const [form, setForm] = useState({ email: "", password: "" });
 
-	const { storeUser } = useAuth() as any;
+	const { storeUser } = useAuth() as AuthContextType;
 	const { createLogin } = useLogin();
 	const submit = async () => {
 		const { response } = await createLogin(form);
 		if (response?.data.statusCode === 200) {
+			console.log(response);
 			storeUser({
 				id: response?.data.id,
 				email: response?.data.email,
@@ -22,6 +23,7 @@ const SignIn = () => {
 				role: response?.data.role,
 				token: response?.data.data.accessToken,
 			});
+
 			router.push("/home");
 		} else {
 			console.log("error login");
