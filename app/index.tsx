@@ -8,16 +8,16 @@ const App = () => {
 	return (
 		<SafeAreaView style={{ backgroundColor: "#ffffff" }}>
 			<ScrollView contentContainerStyle={{ height: "100%" }}>
-				<View className="w-full justify-center items-center h-full px-4 gap-8">
-					<Text className="text-3xl text-dark-900 text-center font-bold">
-						Selamat Datang di Portal Berita Terpercaya
+				<Image source={images.home} className="w-full" />
+				<View className="items-center py-10 px-6 gap-5 rounded-3xl absolute justify-center bg-white bottom-0 right-0 left-0 h-[23rem]">
+					<Text className="text-3xl text-center font-bold">
+						Explore Berita Negeri dan Luar Negeri
 					</Text>
-					<Image source={images.news} className="w-full max-w-[380px] h-[300px]" />
-					<Text className="text-center text-sm text-primary-600">
-						Kami hadir untuk memberikan Anda berita terbaru, terpercaya, dan terkini. Dari politik
-						hingga hiburan, kami meliput semua yang Anda butuhkan untuk tetap terinformasi.
+					<Text className="text-center text-sm">
+						Mengungkap Berita Terbaru dari Dalam dan Luar Negeri: Tetap Terinformasi dengan Kabar
+						Terkini dari Seluruh Penjuru Dunia
 					</Text>
-					<CustomButton title="Mulai" onPress={() => router.push("/sign-in")} />
+					<CustomButton title="Daftar Sekarang" onPress={() => router.push("/sign-up")} />
 				</View>
 			</ScrollView>
 		</SafeAreaView>
