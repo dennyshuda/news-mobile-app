@@ -11,12 +11,12 @@ const SignUp = () => {
 	const [selected, setSelected] = useState("");
 
 	const data = [
-		{ key: "1", value: "Pembaca" },
-		{ key: "2", value: "Penulis" },
+		{ key: "1", value: "WRITER" },
+		{ key: "2", value: "READER" },
 	];
 
 	const submit = async () => {
-		console.log(form, selected);
+		console.log({ ...form, role: selected });
 	};
 
 	return (
@@ -24,14 +24,13 @@ const SignUp = () => {
 			<ScrollView>
 				<View className="w-full justify-center px-6 py-6 gap-3">
 					<View className="flex items-center py-6">
-						<Text className="text-4xl font-bold text-dark-900">Sign Up</Text>
-						{/* <Text className="text-lg text-primary-500">Enter your account to continue</Text> */}
+						<Text className="text-4xl font-bold">Sign Up</Text>
 					</View>
 
 					<View className="gap-5 mt-16">
 						<FormField
-							title="Name"
-							placeholder="Your name"
+							title="Username"
+							placeholder="Your username"
 							onChangeText={(text) => setForm({ ...form, username: text })}
 						/>
 						<FormField
@@ -46,9 +45,9 @@ const SignUp = () => {
 							onChangeText={(text) => setForm({ ...form, password: text })}
 						/>
 						<View className="gap-3">
-							<Text className="text-xl font-bold">Masuk Sebagai</Text>
+							<Text className="text-xl font-bold">Daftar Sebagai</Text>
 							<SelectList
-								setSelected={(val: string) => setSelected(val)}
+								setSelected={(value: string) => setSelected(value)}
 								data={data}
 								save="value"
 								boxStyles={{ height: 50, width: "100%" }}
@@ -58,8 +57,8 @@ const SignUp = () => {
 						<View className="mt-12">
 							<CustomButton title="Daftar" onPress={submit} />
 							<Text className="text-lg text-center">
-								Have an account already?{" "}
-								<Link href="/home" className="font-semibold text-dark-900">
+								Sudah punya akun?{" "}
+								<Link href="/sign-in" className="font-semibold text-carnation-400">
 									Sign In
 								</Link>
 							</Text>

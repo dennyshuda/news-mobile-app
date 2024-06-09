@@ -34,14 +34,13 @@ const SignIn = () => {
 				<View className="w-full justify-center px-6 py-6 gap-3">
 					<View className="flex items-center py-6">
 						<Text className="text-4xl font-bold text-dark-900">Login</Text>
-						{/* <Text className="text-lg text-primary-500">Enter your account to continue</Text> */}
 					</View>
 
 					<View className="gap-5 mt-16">
 						<FormField
 							title="Email"
 							placeholder="Masukkan Email"
-							// keyboardType="email-address"
+							keyboardType="email-address"
 							onChangeText={(text) => setForm({ ...form, email: text })}
 						/>
 						<FormField
@@ -53,8 +52,8 @@ const SignIn = () => {
 						<View className="mt-12">
 							<CustomButton title="Masuk" onPress={submit} />
 							<Text className="text-lg text-center">
-								Don't have account?{" "}
-								<Link href="/sign-up" className="font-semibold text-dark-900">
+								Belum punya akun?{" "}
+								<Link href="/sign-up" className="font-semibold text-carnation-400">
 									Sign Up
 								</Link>
 							</Text>

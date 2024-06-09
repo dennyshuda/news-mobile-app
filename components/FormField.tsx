@@ -10,7 +10,7 @@ const FormField = ({ title, ...props }: FormFieldProps) => {
 	const [show, setShow] = useState<boolean>(false);
 	return (
 		<View>
-			<Text className="text-xl font-bold text-dark-900 mb-2">{title}</Text>
+			<Text className="text-xl font-bold  mb-2">{title}</Text>
 			<View className="border-2 border-primary-300 px-4 h-16 w-full rounded-xl  focus:border-dark-900 font-semibold flex-row items-center justify-between">
 				<TextInput {...props} secureTextEntry={title === "Password" && !show} />
 				{title === "Password" && (
