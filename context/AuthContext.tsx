@@ -1,37 +1,45 @@
 import { createContext, PropsWithChildren, useContext, useEffect, useState } from "react";
 import * as SecureStore from "expo-secure-store";
+import { IUser } from "../services/interfaces/user.types";
+import { router } from "expo-router";
 
-type AuthContextType = {
-	token: string | null;
-	setToken: React.Dispatch<React.SetStateAction<string | null>>;
-	logout: () => Promise<any>;
+export type AuthContextType = {
+	user?: IUser | null;
+	setUser?: React.Dispatch<React.SetStateAction<IUser | null>>;
+	storeUser?: (payload: IUser) => Promise<void>;
+	logout?: () => Promise<void>;
 };
 
-const TOKEN_KEY = "access-token";
+const USER_KEY = "user";
 
 export const AuthContext = createContext<AuthContextType | null>(null);
 
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
-	const [token, setToken] = useState<string | null>(null);
+	const [user, setUser] = useState<IUser | null>(null);
 
 	useEffect(() => {
-		const loadToken = async () => {
-			const token = await SecureStore.getItemAsync(TOKEN_KEY);
-			console.log("stored", token);
-
-			if (token) setToken(token);
+		const loadUser = async () => {
+			const userStored = await SecureStore.getItemAsync(USER_KEY);
+			if (userStored) setUser(JSON.parse(userStored));
 		};
-		loadToken();
+		loadUser();
 	}, []);
 
+	const storeUser = async (payload: IUser) => {
+		await SecureStore.setItemAsync(USER_KEY, JSON.stringify(payload));
+	};
+
 	const logout = async () => {
-		await SecureStore.deleteItemAsync(TOKEN_KEY);
-		setToken(null);
+		await SecureStore.deleteItemAsync(USER_KEY);
+		setUser(null);
+		router.push("/");
 	};
 
 	return (
-		<AuthContext.Provider value={{ token, setToken, logout }}>{children}</AuthContext.Provider>
+		<AuthContext.Provider value={{ user, setUser, storeUser, logout }}>
+			{children}
+		</AuthContext.Provider>
 	);
 };
