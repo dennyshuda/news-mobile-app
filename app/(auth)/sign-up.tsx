@@ -1,22 +1,34 @@
-import { ScrollView, Text, View } from "react-native";
+import { Alert, ScrollView, Text, View } from "react-native";
 import { useState } from "react";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { SelectList } from "react-native-dropdown-select-list";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
+import useRegister from "../../services/hooks/useRegister";
 
 const SignUp = () => {
 	const [form, setForm] = useState({ username: "", email: "", password: "" });
 	const [selected, setSelected] = useState("");
 
-	const data = [
+	const { createRegister } = useRegister();
+
+	const ROLE_OPTION = [
 		{ key: "1", value: "WRITER" },
 		{ key: "2", value: "READER" },
 	];
 
 	const submit = async () => {
-		console.log({ ...form, role: selected });
+		const { response, error } = await createRegister({ ...form, role: selected });
+		if (response || error) {
+			if (error) {
+				console.log(error);
+			} else {
+				console.log(response);
+				Alert.alert("success login");
+				router.push("/sign-in");
+			}
+		}
 	};
 
 	return (
@@ -48,7 +60,7 @@ const SignUp = () => {
 							<Text className="text-xl font-bold">Daftar Sebagai</Text>
 							<SelectList
 								setSelected={(value: string) => setSelected(value)}
-								data={data}
+								data={ROLE_OPTION}
 								save="value"
 								boxStyles={{ height: 50, width: "100%" }}
 								inputStyles={{ alignContent: "center" }}
