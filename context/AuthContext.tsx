@@ -4,10 +4,10 @@ import { IUser } from "../services/interfaces/user.types";
 import { router } from "expo-router";
 
 export type AuthContextType = {
-	user?: IUser | null;
-	setUser?: React.Dispatch<React.SetStateAction<IUser | null>>;
-	storeUser?: (payload: IUser) => Promise<void>;
-	logout?: () => Promise<void>;
+	user: IUser | null;
+	setUser: React.Dispatch<React.SetStateAction<IUser | null>>;
+	storeUser: (payload: IUser) => Promise<void>;
+	logout: () => Promise<void>;
 };
 
 const USER_KEY = "user";
