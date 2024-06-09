@@ -3,4 +3,5 @@ export type IUser = {
 	email: string;
 	username: string;
 	role: string;
+	token?: string;
 };
