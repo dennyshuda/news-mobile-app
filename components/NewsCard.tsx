@@ -20,7 +20,7 @@ const NewsCard = ({ post }: NewsCardProps) => {
 			<View className="p-3 gap-2">
 				<Text className="font-bold text-xl">{post.title}</Text>
 				<Text numberOfLines={2} className="text-lynch-400 text-ellipsis">
-					{post.content}
+					{post.content.replace(/(<([^>]+)>)/gi, "")}
 				</Text>
 				<Text className="text-lynch-400 text-sm">14 Juni 2024</Text>
 			</View>
