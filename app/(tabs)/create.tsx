@@ -16,6 +16,11 @@ import Nav from "../../components/Nav";
 import icons from "../../constant/icons";
 import { actions, RichEditor, RichToolbar } from "react-native-pell-rich-editor";
 import CustomButton from "../../components/CustomButton";
+import { SelectList } from "react-native-dropdown-select-list";
+import { CATEGORY } from "../../constant/category";
+import { AuthContextType, useAuth } from "../../context/AuthContext";
+import useCreatePost from "../../services/hooks/useCreatePost";
+import { router } from "expo-router";
 
 export type IconRecord = {
 	selected: boolean;
@@ -26,7 +31,8 @@ export type IconRecord = {
 
 const Create = () => {
 	const richText = useRef<RichEditor>(null);
-	const contentRef = useRef("opo");
+	const [form, setForm] = useState({ title: "", categoryId: "" });
+	const contentRef = useRef("");
 	const [image, setImage] = useState<string | null>(null);
 	const pickImage = async () => {
 		let result = await ImagePicker.launchImageLibraryAsync({
@@ -37,6 +43,27 @@ const Create = () => {
 		});
 		if (!result.canceled) {
 			setImage(result.assets[0].uri);
+		}
+	};
+
+	const { user } = useAuth() as AuthContextType;
+
+	const { createPost } = useCreatePost();
+
+	const submit = async () => {
+		const { response, error } = await createPost({
+			...form,
+			image: "",
+			content: contentRef.current,
+			userId: user?.id,
+		});
+
+		if (response || error) {
+			if (error) {
+				console.log(error);
+			} else {
+				router.navigate("/home");
+			}
 		}
 	};
 
@@ -71,8 +98,19 @@ const Create = () => {
 					)}
 
 					<View className="gap-5">
-						<View>
-							<TextInput placeholder="Judul" className="border-b-[1px] h-14 border-b-lynch-400" />
+						<View className="gap-5">
+							<TextInput
+								placeholder="Judul"
+								className="border-b-[1px] h-14 border-b-lynch-400"
+								onChangeText={(text) => setForm({ ...form, title: text })}
+							/>
+							<SelectList
+								setSelected={(key: string) => setForm({ ...form, categoryId: key })}
+								data={CATEGORY}
+								save="key"
+								boxStyles={{ height: 50, width: "100%" }}
+								inputStyles={{ alignContent: "center" }}
+							/>
 							<KeyboardAvoidingView
 								behavior={Platform.OS === "ios" ? "padding" : "height"}
 								style={{ flex: 1 }}
@@ -123,7 +161,7 @@ const Create = () => {
 							/>
 						</View>
 
-						<CustomButton title="Publish" onPress={() => console.log(contentRef.current)} />
+						<CustomButton title="Publish" onPress={submit} />
 					</View>
 				</View>
 			</ScrollView>
