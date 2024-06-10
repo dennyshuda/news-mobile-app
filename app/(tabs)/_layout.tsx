@@ -1,6 +1,7 @@
 import { Tabs } from "expo-router";
 import { View, Image, ImageSourcePropType, Text } from "react-native";
 import icons from "../../constant/icons";
+import { AuthContextType, useAuth } from "../../context/AuthContext";
 
 type TabIconProps = {
 	icon: ImageSourcePropType;
@@ -32,7 +33,7 @@ const TabIcon = ({ icon, color, name, focused }: TabIconProps) => {
 };
 
 const TabsLayout = () => {
-	const writer = true;
+	const { user } = useAuth() as AuthContextType;
 
 	return (
 		<Tabs
@@ -68,12 +69,12 @@ const TabsLayout = () => {
 					headerShown: false,
 					tabBarStyle: { display: "none" },
 					tabBarItemStyle: {
-						display: writer ? "flex" : "none",
+						display: user?.role === "WRITER" ? "flex" : "none",
 						position: "absolute",
 						right: 50,
 						bottom: 110,
 					},
-					tabBarIcon: ({ color, focused }: TabBarProps) => (
+					tabBarIcon: () => (
 						<View className="items-center justify-center gap-2 rounded-full h-20 w-20 mb-10">
 							<Image
 								source={icons.plus}

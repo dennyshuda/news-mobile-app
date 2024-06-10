@@ -10,13 +10,13 @@ import { type AuthContextType, useAuth } from "../../context/AuthContext";
 const SignIn = () => {
 	const [form, setForm] = useState({ email: "", password: "" });
 
-	const { storeUser } = useAuth() as AuthContextType;
+	const { setUser } = useAuth() as AuthContextType;
 	const { createLogin } = useLogin();
 	const submit = async () => {
 		const { response } = await createLogin(form);
 		if (response?.data.statusCode === 200) {
 			console.log(response);
-			storeUser({
+			setUser({
 				id: response?.data.id,
 				email: response?.data.email,
 				username: response?.data.username,
