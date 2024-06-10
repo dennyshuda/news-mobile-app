@@ -1,6 +1,7 @@
 import { Text, View, Image, Pressable } from "react-native";
 import images from "../constant/images";
 import { IPost } from "../services/interfaces/post.types";
+import { router } from "expo-router";
 
 type NewsCardProps = {
 	post: IPost;
@@ -9,7 +10,7 @@ type NewsCardProps = {
 const NewsCard = ({ post }: NewsCardProps) => {
 	return (
 		<Pressable
-			onPress={() => console.log("s")}
+			onPress={() => router.push(`/detail/${post.id}`)}
 			className="rounded-xl border-[1px] border-lynch-400"
 		>
 			<View>
