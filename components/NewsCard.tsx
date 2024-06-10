@@ -10,7 +10,7 @@ type NewsCardProps = {
 const NewsCard = ({ post }: NewsCardProps) => {
 	return (
 		<Pressable
-			onPress={() => router.push(`/detail/${post.id}`)}
+			onPress={() => router.navigate(`/detail/${post.id}`)}
 			className="rounded-xl border-[1px] border-lynch-400"
 		>
 			<View>
