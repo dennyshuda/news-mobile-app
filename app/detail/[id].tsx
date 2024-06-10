@@ -1,24 +1,22 @@
-import { SafeAreaView, ScrollView, StyleSheet, Text, View, Image } from "react-native";
+import { SafeAreaView, ScrollView, Text, View, Image, useWindowDimensions } from "react-native";
 import React from "react";
 import { WebView } from "react-native-webview";
 import { useLocalSearchParams } from "expo-router";
 import Nav from "../../components/Nav";
 import images from "../../constant/images";
+import useGetDetailPost from "../../services/hooks/useGetDetailPost";
 
 const PostDetail = () => {
 	const { id } = useLocalSearchParams();
+	const { width } = useWindowDimensions();
+	const { post, status } = useGetDetailPost(id);
 
-	const content = `<body style="font-size: 200%">
-		<h1>halo ini dalah Judul</h1>
-		<h2>halo ini dalah Judul</h2>
-		<b>baloyskie</b>
-		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, iure.</p>
-		<p>
-			Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus incidunt possimus, libero
-			fugit quae commodi enim distinctio dignissimos pariatur, quasi soluta totam recusandae nemo,
-			veritatis deleniti vero doloribus eaque sequi!
-		</p>
-	</body>`;
+	if (status === "loading")
+		return (
+			<View>
+				<Text>Loading</Text>
+			</View>
+		);
 
 	return (
 		<SafeAreaView style={{ backgroundColor: "white", height: "100%" }}>
@@ -27,18 +25,21 @@ const PostDetail = () => {
 					<Nav showBookmark={true} />
 
 					<View className="mt-5">
-						<Text>Budiono Siregar | 14 Juni 2024</Text>
-						<Text className="text-2xl font-bold">Judul Berita {id}</Text>
+						<Text>{post?.user.username} | 14 Juni 2024</Text>
+						<Text className="text-2xl font-bold">{post?.title}</Text>
 
 						<Image source={images.thumbnail} className="w-full" />
 
-						<View style={{ flex: 1, height: 200 }}>
-							<WebView
-								originWhitelist={["*"]}
-								source={{
-									html: content,
-								}}
-							/>
+						<View style={{ flex: 1, height: width }}>
+							{post && (
+								<WebView
+									originWhitelist={["*"]}
+									startInLoadingState={true}
+									source={{
+										html: post.content,
+									}}
+								/>
+							)}
 						</View>
 					</View>
 				</View>
@@ -48,5 +49,3 @@ const PostDetail = () => {
 };
 
 export default PostDetail;
-
-const styles = StyleSheet.create({});
