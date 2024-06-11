@@ -8,6 +8,7 @@ import arrowLeft from "../assets/icons/arrow-left.png";
 import archive from "../assets/icons/archive.png";
 import archiveFill from "../assets/icons/archive-fill.png";
 import galleryAdd from "../assets/icons/gallery-add.png";
+import search from "../assets/icons/search-normal.png";
 
 export default {
 	home,
@@ -20,4 +21,5 @@ export default {
 	archive,
 	archiveFill,
 	galleryAdd,
+	search,
 };
