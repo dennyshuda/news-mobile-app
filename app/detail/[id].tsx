@@ -24,7 +24,7 @@ const PostDetail = () => {
 				<View className="px-4 pt-10">
 					<Nav showBookmark={true} />
 
-					<View className="mt-5">
+					<View className="mt-5 gap-4">
 						<Text>{post?.user.username} | 14 Juni 2024</Text>
 						<Text className="text-2xl font-bold">{post?.title}</Text>
 
@@ -36,7 +36,12 @@ const PostDetail = () => {
 									originWhitelist={["*"]}
 									startInLoadingState={true}
 									source={{
-										html: post.content,
+										html: `
+										<div style="font-size: 250%">
+										${post.content}
+										</div>
+										
+										`,
 									}}
 								/>
 							)}
